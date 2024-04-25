@@ -69,7 +69,7 @@ public class WebPlayerServerHttpServer extends WebPlayerServer {
 				if (e.getMessage().contains("UMS.jks")) {
 					LOGGER.info(
 							"To enable HTTPS please generate a self-signed keystore file " +
-							"called \"UMS.jks\" with password \"umsums\" using the java " +
+							"called \"UMS.jks\" with password set in  \"web_player_https_keystore_password\" using the java " +
 							"'keytool' commandline utility, and place it in the profile folder"
 					);
 				}
@@ -149,7 +149,9 @@ public class WebPlayerServerHttpServer extends WebPlayerServer {
 
 	private static HttpServer httpsServer(InetSocketAddress address) throws IOException, GeneralSecurityException {
 		// Initialize the keystore
-		char[] password = "umsums".toCharArray();
+		char[] password = CONFIGURATION.getKeyStorePassword()
+				.map(String::toCharArray)
+				.orElseThrow(() -> new IOException("Missing keystore password. Property \"web_player_https_keystore_password\" must be set."));
 		KeyStore keyStore = KeyStore.getInstance("JKS");
 		try (FileInputStream fis = new FileInputStream(FileUtil.appendPathSeparator(CONFIGURATION.getProfileDirectory()) + "UMS.jks")) {
 			keyStore.load(fis, password);

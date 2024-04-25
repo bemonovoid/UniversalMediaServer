@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -456,6 +457,7 @@ public class UmsConfiguration extends BaseConfiguration {
 	private static final String KEY_WEB_PLAYER_DOWNLOAD = "web_player_download";
 	private static final String KEY_WEB_PLAYER_ENABLE = "web_player_enable";
 	private static final String KEY_WEB_PLAYER_HTTPS = "web_player_https";
+	private static final String KEY_WEB_PLAYER_HTTPS_KEYSTORE_PWD = "web_player_https_keystore_password";
 	private static final String KEY_WEB_PLAYER_IMAGE_SLIDE = "web_player_image_show_delay";
 	private static final String KEY_WEB_PLAYER_LOOP_AUDIO = "web_player_loop_audio";
 	private static final String KEY_WEB_PLAYER_LOOP_IMAGE = "web_player_loop_image";
@@ -5115,6 +5117,10 @@ public class UmsConfiguration extends BaseConfiguration {
 
 	public boolean getWebPlayerHttps() {
 		return getBoolean(KEY_WEB_PLAYER_HTTPS, false);
+	}
+
+	public Optional<String> getKeyStorePassword() {
+		return Optional.ofNullable(getString(KEY_WEB_PLAYER_HTTPS_KEYSTORE_PWD, null));
 	}
 
 	public boolean isWebPlayerControllable() {
