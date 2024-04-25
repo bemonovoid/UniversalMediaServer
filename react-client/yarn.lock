@@ -2524,18 +2524,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/notifications@npm:6.0.21":
-  version: 6.0.21
-  resolution: "@mantine/notifications@npm:6.0.21"
+"@mantine/notifications@npm:7.7.1":
+  version: 7.7.1
+  resolution: "@mantine/notifications@npm:7.7.1"
   dependencies:
-    "@mantine/utils": 6.0.21
-    react-transition-group: 4.4.2
+    "@mantine/store": 7.7.1
+    react-transition-group: 4.4.5
   peerDependencies:
-    "@mantine/core": 6.0.21
-    "@mantine/hooks": 6.0.21
-    react: ">=16.8.0"
-    react-dom: ">=16.8.0"
-  checksum: e4c05487b12c86197c2a0422cc22710b2266b20886259264e0d42ca5504ca99a9d0e9d0d1a48218099b387fde1151b794a80c0b29f22635d27e1aebf5c19d269
+    "@mantine/core": 7.7.1
+    "@mantine/hooks": 7.7.1
+    react: ^18.2.0
+    react-dom: ^18.2.0
+  checksum: 524efd56952ab24581cd4055fc720eb23aa9cf8d7bd1755d82cb9191281b5c20ae5f9a2c2f41173da8e314e9727a0ff27eb1841744366e51f7f307b518403186
   languageName: node
   linkType: hard
 
@@ -2551,6 +2551,15 @@ __metadata:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   checksum: 9dfa5a5e95fbb77b9c40266f34f9ce1189bb3b912d0213d90f9750adfc91b8d276dd904849401e775ca5eb8f6b7d31be80c581dc0013333b7c554635ce6a0250
+  languageName: node
+  linkType: hard
+
+"@mantine/store@npm:7.7.1":
+  version: 7.7.1
+  resolution: "@mantine/store@npm:7.7.1"
+  peerDependencies:
+    react: ^18.2.0
+  checksum: 2d639367d5a351e088d0ef70c788ecd17e9dbf5a1e255d6f46ed6230e20b8d3ebc659031acbf34d9d06f25ed03b453be094d317785bd2de0d8b676b067101732
   languageName: node
   linkType: hard
 
@@ -7545,7 +7554,7 @@ __metadata:
 
 "fsevents@patch:fsevents@2.3.2#~builtin<compat/fsevents>":
   version: 2.3.2
-  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=18f3a7"
   dependencies:
     node-gyp: latest
   conditions: os=darwin
@@ -7554,7 +7563,7 @@ __metadata:
 
 "fsevents@patch:fsevents@^2.3.2#~builtin<compat/fsevents>, fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
   version: 2.3.3
-  resolution: "fsevents@patch:fsevents@npm%3A2.3.3#~builtin<compat/fsevents>::version=2.3.3&hash=df0bf1"
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.3#~builtin<compat/fsevents>::version=2.3.3&hash=18f3a7"
   dependencies:
     node-gyp: latest
   conditions: os=darwin
@@ -12375,9 +12384,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-transition-group@npm:4.4.2":
-  version: 4.4.2
-  resolution: "react-transition-group@npm:4.4.2"
+"react-transition-group@npm:4.4.5":
+  version: 4.4.5
+  resolution: "react-transition-group@npm:4.4.5"
   dependencies:
     "@babel/runtime": ^7.5.5
     dom-helpers: ^5.0.1
@@ -12386,7 +12395,7 @@ __metadata:
   peerDependencies:
     react: ">=16.6.0"
     react-dom: ">=16.6.0"
-  checksum: b67bf5b3e86dbab72d658b9a52a3589e5960583ab28c7c66272427d8fe30d4c7de422d5046ae96bd2683cdf80cc3264b2516f5ce80cae1dbe6cf3ca6dda392c5
+  checksum: 75602840106aa9c6545149d6d7ae1502fb7b7abadcce70a6954c4b64a438ff1cd16fc77a0a1e5197cdd72da398f39eb929ea06f9005c45b132ed34e056ebdeb1
   languageName: node
   linkType: hard
 
@@ -12689,7 +12698,7 @@ __metadata:
 
 "resolve@patch:resolve@^1.1.7#~builtin<compat/resolve>, resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.19.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.20.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.4#~builtin<compat/resolve>":
   version: 1.22.8
-  resolution: "resolve@patch:resolve@npm%3A1.22.8#~builtin<compat/resolve>::version=1.22.8&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A1.22.8#~builtin<compat/resolve>::version=1.22.8&hash=07638b"
   dependencies:
     is-core-module: ^2.13.0
     path-parse: ^1.0.7
@@ -12702,7 +12711,7 @@ __metadata:
 
 "resolve@patch:resolve@^2.0.0-next.5#~builtin<compat/resolve>":
   version: 2.0.0-next.5
-  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.5#~builtin<compat/resolve>::version=2.0.0-next.5&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.5#~builtin<compat/resolve>::version=2.0.0-next.5&hash=07638b"
   dependencies:
     is-core-module: ^2.13.0
     path-parse: ^1.0.7
@@ -14183,7 +14192,7 @@ __metadata:
 
 "typescript@patch:typescript@5.4.5#~builtin<compat/typescript>":
   version: 5.4.5
-  resolution: "typescript@patch:typescript@npm%3A5.4.5#~builtin<compat/typescript>::version=5.4.5&hash=e012d7"
+  resolution: "typescript@patch:typescript@npm%3A5.4.5#~builtin<compat/typescript>::version=5.4.5&hash=701156"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
@@ -14201,7 +14210,7 @@ __metadata:
     "@mantine/form": 6.0.21
     "@mantine/hooks": 6.0.21
     "@mantine/modals": 6.0.21
-    "@mantine/notifications": 6.0.21
+    "@mantine/notifications": 7.7.1
     "@mantine/prism": 6.0.21
     "@microsoft/fetch-event-source": 2.0.1
     "@mycujoo/videojs-hls-quality-selector": 1.1.5-rc.4
