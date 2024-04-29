@@ -19,6 +19,8 @@ package net.pms.util;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.function.Function;
@@ -30,6 +32,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
@@ -70,7 +73,7 @@ public class UriFileRetriever {
 		}
 		try (CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault()) {
 			httpclient.start();
-			HttpGet request = new HttpGet(uriObject.toString());
+			HttpGet request = new HttpGet(URLEncoder.encode(uri, StandardCharsets.UTF_8));
 			Future<HttpResponse> future = httpclient.execute(request, null);
 			HttpResponse response = future.get();
 			int statusCode = response.getStatusLine().getStatusCode();
