@@ -19,10 +19,10 @@ package net.pms.util;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URLEncoder;
-import java.rmi.UnexpectedException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.function.Function;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HeaderElement;
@@ -43,7 +43,13 @@ import org.apache.http.nio.client.methods.HttpAsyncMethods;
  */
 public class UriFileRetriever {
 
-	/**
+	private final MaliciousURLScanner maliciousURLScanner;
+
+  public UriFileRetriever() {
+    this.maliciousURLScanner = new MaliciousURLScannerMock();
+  }
+
+  /**
 	 * Download file from the external server and return the content of it in
 	 * the ByteArray.
 	 *
@@ -58,6 +64,9 @@ public class UriFileRetriever {
 		String uriScheme = uriObject.getScheme();
 		if (!uriScheme.startsWith("http")) {
 			throw new IllegalArgumentException(String.format("Unsupported uri scheme. Expected 'http', 'https', but was: %s", uriScheme));
+		}
+		if (!maliciousURLScanner.scan(uri)) {
+			throw new IllegalArgumentException(String.format("Malicious url detected. Resource downloading aborted. %s", uri));
 		}
 		try (CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault()) {
 			httpclient.start();
@@ -114,6 +123,24 @@ public class UriFileRetriever {
 
 			Future<File> future = httpclient.execute(HttpAsyncMethods.createGet(uri), consumer, null, null);
 			file = future.get();
+		}
+	}
+
+	interface MaliciousURLScanner {
+		boolean scan(String uri);
+	}
+
+	static class MaliciousURLScannerMock implements MaliciousURLScanner {
+
+		private final Function<String, Boolean> urlScannerEngine;
+
+    MaliciousURLScannerMock() {
+      this.urlScannerEngine = uri -> true;
+    }
+
+		@Override
+    public boolean scan(String uri) {
+			return urlScannerEngine.apply(uri);
 		}
 	}
 }
