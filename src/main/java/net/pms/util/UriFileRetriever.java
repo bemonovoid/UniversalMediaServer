@@ -19,9 +19,13 @@ package net.pms.util;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URLEncoder;
+import java.rmi.UnexpectedException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import org.apache.commons.io.IOUtils;
+import org.apache.http.Header;
+import org.apache.http.HeaderElement;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
@@ -50,15 +54,31 @@ public class UriFileRetriever {
 	 * @throws IOException
 	 */
 	public byte[] get(String uri) throws IOException {
+		URI uriObject = URI.create(uri);
+		String uriScheme = uriObject.getScheme();
+		if (!uriScheme.startsWith("http")) {
+			throw new IllegalArgumentException(String.format("Unsupported uri scheme. Expected 'http', 'https', but was: %s", uriScheme));
+		}
 		try (CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault()) {
 			httpclient.start();
-			HttpGet request = new HttpGet(uri);
+			HttpGet request = new HttpGet(uriObject.toString());
 			Future<HttpResponse> future = httpclient.execute(request, null);
 			HttpResponse response = future.get();
 			int statusCode = response.getStatusLine().getStatusCode();
 			if (statusCode != HttpStatus.SC_OK) {
-				throw new IOException("HTTP response not OK for " + uri);
+				throw new IOException("HTTP response not OK for " + uriObject.toString());
 			}
+			Header contentTypeHeader = response.getEntity().getContentType();
+			if (contentTypeHeader != null && contentTypeHeader.getElements().length > 0) {
+				for (HeaderElement contentTypeHeaderElement : contentTypeHeader.getElements()) {
+					String contentType = contentTypeHeaderElement.getValue();
+					if (contentType.startsWith("image/")) {
+						break;
+					}
+				}
+				throw new IllegalStateException(String.format("Illegal content type of downloaded file. %s resource must be an image", uriObject));
+			}
+			//TODO Use file parsers like Apache Tika to detect file mime type based on file content. Never rely on content type.
 
 			return IOUtils.toByteArray(response.getEntity().getContent());
 		} catch (InterruptedException | ExecutionException e) {
