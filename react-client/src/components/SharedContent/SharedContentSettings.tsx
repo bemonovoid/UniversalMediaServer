@@ -52,7 +52,7 @@ export default function SharedContentSettings(
     try {
       await sendAction('Server.ScanAllSharedFolders');
     } catch (err) {
-      console.error(err);
+      console.error("Server error. Scan all shared folders failed.");
     }
     setLoading(false);
   }
@@ -62,7 +62,7 @@ export default function SharedContentSettings(
     try {
       await sendAction('Server.ScanAllSharedFoldersCancel');
     } catch (err) {
-      console.error(err);
+      console.error("Server error. Cancelling all shared folders scan failed.");
     }
     setLoading(false);
   }

@@ -548,20 +548,20 @@ public class HttpExchangeServletRequest implements HttpServletRequest {
 			List<HttpCookie> httpCookies = HttpCookie.parse(cookieStr);
 			for (HttpCookie httpCookie : httpCookies) {
 				Cookie cookie = new Cookie(httpCookie.getName(), httpCookie.getValue());
+				cookie.setHttpOnly(true);
+				cookie.setSecure(true);
 				if (httpCookie.getComment() != null) {
 					cookie.setComment(httpCookie.getComment());
 				}
 				if (httpCookie.getDomain() != null) {
 					cookie.setDomain(httpCookie.getDomain());
 				}
-				cookie.setHttpOnly(httpCookie.isHttpOnly());
 				if (httpCookie.getMaxAge() > -1) {
 					cookie.setMaxAge((int) httpCookie.getMaxAge());
 				}
 				if (httpCookie.getPath() != null) {
 					cookie.setPath(httpCookie.getPath());
 				}
-				cookie.setSecure(httpCookie.getSecure());
 				cookie.setVersion(httpCookie.getVersion());
 				cookiesList.add(cookie);
 			}

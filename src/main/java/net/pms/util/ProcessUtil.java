@@ -244,7 +244,7 @@ public class ProcessUtil {
 			PMS.shutdown();
 			pb.start();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 		}
 		PMS.quit();
 	}
